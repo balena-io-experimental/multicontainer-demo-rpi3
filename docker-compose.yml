@@ -26,13 +26,3 @@ services:
       - "/dev/vchiq:/dev/vchiq"
     environment:
       WPE_URL: http://proxy/
-  # metrics:
-  #   build: ./metrics
-  #   restart: 'no'
-  #   pid: "host"
-  #   network_mode: "host"
-  #   privileged: true
-  #   labels:
-  #     io.resin.features.kernel-modules: '1'
-  #     io.resin.features.firmware: '1'
-  #     io.resin.features.balena-socket: '1'
