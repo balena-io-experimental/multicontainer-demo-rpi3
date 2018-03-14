@@ -1,0 +1,8 @@
+#!/bin/sh
+
+fbcp &
+until ping -c1 proxy ; do :; done
+
+echo "loading WPE with url: $WPE_URL"
+# sleep 3s
+WPELauncher $WPE_URL > /dev/null 2>&1

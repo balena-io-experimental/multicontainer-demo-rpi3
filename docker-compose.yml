@@ -1,0 +1,38 @@
+version: '2'
+services:
+  frontend:
+    build: ./frontend
+    expose:
+      - "80"
+  proxy:
+    build: ./haproxy
+    depends_on:
+      - frontend
+      - data
+    ports:
+      - "80:80"
+  data:
+    build: ./data
+    expose:
+      - "8080"
+  gui:
+    build: ./wpe
+    depends_on:
+      - proxy
+      - frontend
+    devices:
+      - "/dev/fb0:/dev/fb0"
+      - "/dev/fb1:/dev/fb1"
+      - "/dev/vchiq:/dev/vchiq"
+    environment:
+      WPE_URL: http://proxy/
+  # metrics:
+  #   build: ./metrics
+  #   restart: 'no'
+  #   pid: "host"
+  #   network_mode: "host"
+  #   privileged: true
+  #   labels:
+  #     io.resin.features.kernel-modules: '1'
+  #     io.resin.features.firmware: '1'
+  #     io.resin.features.balena-socket: '1'
