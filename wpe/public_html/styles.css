@@ -1,0 +1,17 @@
+#container {
+    display: table;
+    position: absolute;
+    top: 50%;
+    left: 42%;
+    transform: translateY(-50%);
+}
+
+#update {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#loader {
+    color: black;
+}
