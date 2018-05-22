@@ -24,5 +24,3 @@ services:
       - "/dev/fb0:/dev/fb0"
       - "/dev/fb1:/dev/fb1"
       - "/dev/vchiq:/dev/vchiq"
-    environment:
-      WPE_URL: http://proxy/
