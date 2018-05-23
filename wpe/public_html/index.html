@@ -1,30 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <meta charset="utf-8">
+<script src="jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JS Bin</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
-<body>
-  <div id="container">
-      <a id="update" href="#">
-          <i id="loader" class="fa fa-cog fa-spin fa-5x fa-fw"></i>
-      </a>
-  </div>
-
   <script>
-        function status(response) {
-          console.log(response)
-          if (response.ok) {
-            return response
-          } 
-          console.log(response.statusText)
-          throw new Error(response.statusText)
+
+    function status(response) {
+        console.log(response)
+        if (response.ok) {
+          return response
         }
-        
+        console.log(response.statusText)
+        throw new Error(response.statusText)
+    }
+
+    $(document).ready(function() {
         setInterval(() => {
           fetch('http://proxy/')
           .then(status)
@@ -36,6 +27,12 @@
             console.log('Request failed', error);
           });
         }, 1000);
+    })
   </script>
+</head>
+<body>
+  <div id="loader">
+    <img src="resin_logo.svg" width="70" height="70">
+  </div>
 </body>
 </html>
