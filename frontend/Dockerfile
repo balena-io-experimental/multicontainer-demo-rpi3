@@ -3,6 +3,17 @@ FROM arm32v6/node:8.9-alpine
 # Defines our working directory in container
 WORKDIR /usr/src/app
 
+# Required for wget to work in the next step
+RUN apk add --no-cache ca-certificates openssl
+
+# Static install required JS dependencies
+ENV JQUERY_VERSION=3.3.1
+ENV REQUIREJS_VERSION=2.3.5
+RUN mkdir -p static/js && \
+    wget "https://code.jquery.com/jquery-${JQUERY_VERSION}.min.js" -O static/js/jquery.min.js && \
+    wget "https://code.highcharts.com/highcharts.js" -O static/js/highcharts.js && \
+    wget "http://requirejs.org/docs/release/${REQUIREJS_VERSION}/minified/require.js" -O static/js/require.js
+
 # Copies the package.json first for better cache on later pushes
 COPY package.json package.json
 
