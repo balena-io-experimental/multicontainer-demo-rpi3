@@ -10,6 +10,11 @@ period = parseInt(process.env.PERIOD) || 500;
 
 server.listen(8080);
 
+let sendTemp = function(socket, data) {
+  // data.color = '#FF0000'
+  socket.emit('temperature', data);
+}
+
 let getCpuTemp = function(socket) {
   'use strict';
   exec('cat /sys/class/thermal/thermal_zone*/temp', (err, stdout) => {
@@ -17,7 +22,7 @@ let getCpuTemp = function(socket) {
     let data = {
       t: parseFloat(stdout) / 1000
     };
-    socket.emit('temperature', data);
+    sendTemp(socket, data);
   });
 };
 
@@ -26,7 +31,7 @@ let getRandomTemp = function(socket) {
   let data = {
     t: (20 + Math.floor(Math.random() * 30))
   };
-  socket.emit('temperature', data);
+  sendTemp(socket, data);
 };
 
 io.on('connection', function(socket) {
