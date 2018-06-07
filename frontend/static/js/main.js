@@ -51,6 +51,10 @@ define(["jquery", "highcharts", "socketio"], function($, Highcharts, io) {
 
     socket.on("temperature", function(data) {
       var series = chart.series[0];
+
+      // If data.color is undefined, Highcharts fall back to the default color (blue)
+      chart.series[0].options.color = data.color;
+      chart.series[0].update(chart.series[0].options);
       series.addPoint([data.t], true, series.data.length > 200);
     });
   });
