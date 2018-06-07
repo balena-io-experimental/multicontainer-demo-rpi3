@@ -15,6 +15,7 @@
         throw new Error(response.statusText)
     }
 
+    var reload = false;
     $(document).ready(function() {
         setInterval(() => {
           fetch('http://proxy/')
@@ -23,8 +24,14 @@
             console.log('fetch success');
             $('#loader').hide();
             window.location = 'http://proxy/'
+            if (reload) {
+              reload = false
+              window.location.reload(true)
+            }
+
           }).catch(function(error) {
             console.log('Request failed', error);
+            reload = true
           });
         }, 1000);
     })
