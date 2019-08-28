@@ -1,6 +1,6 @@
 define(["jquery", "highcharts", "socketio"], function($, Highcharts, io) {
   $(document).ready(function() {
-    $("div#loading").hide()
+    $("div#loading").hide();
     var chart = new Highcharts.Chart({
       chart: {
         type: "area",
@@ -35,12 +35,18 @@ define(["jquery", "highcharts", "socketio"], function($, Highcharts, io) {
       },
       plotOptions: {
         series: {
-          lineWidth: 1
+          lineWidth: 1,
+          marker: {
+            enabled: false
+          }
         }
       },
       series: [
         {
-          data: [[0]]
+          name: "Temperature",
+          type: "area",
+          color: "#008800",
+          data: []
         }
       ]
     });
@@ -49,12 +55,8 @@ define(["jquery", "highcharts", "socketio"], function($, Highcharts, io) {
       window.location.protocol + "//" + window.location.hostname
     );
 
-    socket.on("temperature", function(data) {
+    socket.on("temperature", data => {
       var series = chart.series[0];
-
-      // If data.color is undefined, Highcharts fall back to the default color (blue)
-      chart.series[0].options.color = data.color;
-      chart.series[0].update(chart.series[0].options);
       series.addPoint([data.t], true, series.data.length > 200);
     });
   });
