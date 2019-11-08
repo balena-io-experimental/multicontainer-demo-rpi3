@@ -11,7 +11,6 @@ period = parseInt(process.env.PERIOD) || 500;
 server.listen(8080);
 
 let sendTemp = function(socket, data) {
-   //data.color = '#FF0000'
   socket.emit('temperature', data);
 }
 
@@ -38,8 +37,8 @@ io.on('connection', function(socket) {
   'use strict';
   console.log('a user connected');
   let dataLoop = setInterval(function() {
-    //getCpuTemp(socket);
-    getRandomTemp(socket);
+    getCpuTemp(socket);
+    //getRandomTemp(socket);
   }, period);
 	socket.on('disconnect', function() {
       console.log('a user disconnected');
