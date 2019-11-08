@@ -11,7 +11,6 @@ period = parseInt(process.env.PERIOD) || 500;
 server.listen(8080);
 
 let sendTemp = function(socket, data) {
-   //data.color = '#FF0000'
   socket.emit('temperature', data);
 }
 

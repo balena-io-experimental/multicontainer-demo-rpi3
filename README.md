@@ -40,6 +40,13 @@ BALENA_HOST_CONFIG_hdmi_cvt	320 240 60 1 0 0 0
 
 In order to demonstrate some visible changes after an update, you can follow these steps:
 
-- In https://github.com/balena-io-projects/multicontainer-demo-rpi3/blob/master/data/index.js
-  - Uncomment `// data.color = '#FF0000'` . This will change the graph from the default blue to a more visible red color.
-  - Comment out `getRandomTemp(socket);` and uncomment `// getCpuTemp(socket);`. After pushing this change, the graph should be less random, with values around the current CPU temperature. If you provision a local device, you can show off a cool effect by touching the CPU with your finger; the temperature will instantly drop and that will be visible in the graph.
+##### Fix a bug in the data service which makes it print the correct CPU Temp.
+- Open `data/index.js`
+- Comment out `getRandomTemp(socket);` and uncomment `// getCpuTemp(socket);`. After pushing this change, the graph should be less random, with values around the current CPU temperature. If you provision a local device, you can show off a cool effect by touching the CPU with your finger; the temperature will instantly drop and that will be visible in the graph. You can also see the graph on the DeviceURL
+
+##### Change the Chart Color
+- Open `frontend/index.js`
+- Change the line `var chartColor = process.env.CHART_COLOR || '#0000FF';` to set the default color. e.g.: Change `#0000FF` --> `#FF0000` which should show a nice color change.
+
+##### Set ENV var
+Its also possible to change the color of the graph via ENV var, which can either be on the fleet or per-device. Set `CHART_COLOR` on ENV VARs.
