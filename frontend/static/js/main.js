@@ -5,6 +5,7 @@ define(["jquery", "highcharts", "socketio"], function($, Highcharts, io) {
     //Default chart color
     var chartColor = '#0000FF'
 
+    // Get the chart color and create a chart instance
     $.get( "color", function( data ) {
       chartColor = data
       console.log(chartColor)

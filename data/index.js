@@ -37,8 +37,8 @@ io.on('connection', function(socket) {
   'use strict';
   console.log('a user connected');
   let dataLoop = setInterval(function() {
-    getCpuTemp(socket);
-    //getRandomTemp(socket);
+    //getCpuTemp(socket);
+    getRandomTemp(socket);
   }, period);
 	socket.on('disconnect', function() {
       console.log('a user disconnected');
